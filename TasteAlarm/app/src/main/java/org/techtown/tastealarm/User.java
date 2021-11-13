@@ -1,8 +1,13 @@
 package org.techtown.tastealarm;
 
+import com.google.gson.annotations.SerializedName;
+
 public class User {
+    @SerializedName("userId")
     private String userId;
+    @SerializedName("nickname")
     private String nickname;
+    @SerializedName("userPW")
     private String userPW;
 
     public String getUserId() {

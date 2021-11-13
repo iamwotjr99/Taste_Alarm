@@ -44,6 +44,8 @@ public class JoinActivity extends AppCompatActivity {
         etJoinPW = findViewById(R.id.join_password);
         etJoinPWCheck = findViewById(R.id.join_password_sign);
         tvCheckText = findViewById(R.id.join_sign_text);
+        btnJoinIDCheck = findViewById(R.id.join_check);
+        btnJoin = findViewById(R.id.join_button);
 
         String nickname = etJoinNickname.getText().toString();
         String userId = etJoinID.getText().toString();
@@ -53,7 +55,7 @@ public class JoinActivity extends AppCompatActivity {
         btnJoinIDCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(userId.equals("")) {
+                if(etJoinID.length() == 0) {
                     tvCheckText.setText("아이디를 입력해주세요.");
                     tvCheckText.setTextColor(Color.parseColor("#FF0000"));
                 } else {

@@ -4,7 +4,7 @@ const dbPool = require('./dbconfig');
 
 // 아이디 중복 확인
 router.get('/get/join/checkid/:userId', (req, res) => {
-    let userId = req.params.id;
+    let userId = req.params.userId;
 
     console.log(userId);
 
