@@ -47,7 +47,7 @@ router.post('/post/join/:nickname/:userId/:userPW', (req, res) => {
             console.log("error");
             return err;
         }
-        let sql = 'INSERT INTO user VALUE (?, ?, ?)'
+        let sql = 'INSERT INTO user VALUES (?, ?, ?)'
 
         connection.query(sql, [nickname, userId, userPW], (err, result) =>{
             if(err) {

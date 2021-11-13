@@ -34,6 +34,7 @@ public class JoinActivity extends AppCompatActivity {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ServerURL.SERVER_URL)
+                .addConverterFactory(new NullOnEmptyConverterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -65,8 +66,7 @@ public class JoinActivity extends AppCompatActivity {
                         public void onResponse(Call<User> call, Response<User> response) {
                             if(response.isSuccessful()) {
                                 User getResult = response.body();
-                                Log.d("getCall", getResult.getUserId());
-                                if(getResult.getUserId() == null) {
+                                if(getResult == null) {
                                     tvCheckText.setText("사용할 수 있는 아이디입니다.");
                                     tvCheckText.setTextColor(Color.parseColor("#00FF00"));
                                     Log.d("JoinActivity", "사용할 수 있는 아이디 성공");
