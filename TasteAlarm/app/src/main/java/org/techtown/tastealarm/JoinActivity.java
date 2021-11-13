@@ -52,6 +52,7 @@ public class JoinActivity extends AppCompatActivity {
         String userPW= etJoinPW.getText().toString();
         String userPWCheck = etJoinPWCheck.getText().toString();
 
+
         btnJoinIDCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
