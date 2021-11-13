@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/GitHub/Taste_Alarm/TasteAlarm/app/src/main/res/drawable/layout_border.xml" value="0.38229166666666664" />
+        <entry key="..\:/GitHub/Taste_Alarm/TasteAlarm/app/src/main/res/layout/activity_join.xml" value="0.36614583333333334" />
+        <entry key="..\:/GitHub/Taste_Alarm/TasteAlarm/app/src/main/res/layout/activity_login.xml" value="0.5" />
+        <entry key="..\:/GitHub/Taste_Alarm/TasteAlarm/app/src/main/res/layout/activity_main.xml" value="0.2509057971014493" />
+        <entry key="..\:/GitHub/Taste_Alarm/TasteAlarm/app/src/main/res/layout/fragment_home.xml" value="0.36614583333333334" />
+        <entry key="..\:/GitHub/Taste_Alarm/TasteAlarm/app/src/main/res/layout/fragment_review.xml" value="0.36614583333333334" />
+        <entry key="..\:/GitHub/Taste_Alarm/TasteAlarm/app/src/main/res/layout/fragment_user.xml" value="0.36614583333333334" />
+        <entry key="..\:/GitHub/Taste_Alarm/TasteAlarm/app/src/main/res/menu/menu_bottommavigationview.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
