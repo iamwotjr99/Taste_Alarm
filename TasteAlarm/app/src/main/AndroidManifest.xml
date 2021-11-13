@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TasteAlarm">
         <activity
-            android:name=".MainActivity"
+            android:name=".JoinActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
