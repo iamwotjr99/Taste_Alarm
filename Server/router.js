@@ -63,10 +63,32 @@ router.post('/post/join/:nickname/:userId/:userPW', (req, res) => {
 })
 
 // 로그인
-router.get('/get/login/user', (req, res) => {
-    let userId = req.body.userId;
-    let userPW = req.body.userPW;
+router.get('/get/login/:userId/:userPW', (req, res) => {
+    let userId = req.params.userId;
+    let userPW = req.params.userPW;
+
     console.log(userId, userPW);
+    
+    dbPool.getConnection((err, connection) => {
+        if(err) {
+            err.code = 500;
+            console.log("error");
+            return err;
+        }
+
+        let sql = 'SELECT * FROM user WHERE userID = ? AND userPW = ?'
+        connection.query(sql, [userId, userPW], (err, result) => {
+            if(err) {
+                err.code = 500;
+                connection.release();
+                return err;
+            }
+
+            console.log(result[0]);
+            res.send(result[0]);
+            console.log("User Login Success!");
+        })
+    })
 })
 
 router.get('/taste', (req, res) => {

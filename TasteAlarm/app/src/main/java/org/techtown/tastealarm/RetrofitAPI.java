@@ -14,4 +14,8 @@ public interface RetrofitAPI {
     Call<User> postJoinUser(@Path("nickname") String nickname,
                             @Path("userId") String userId,
                             @Path("userPW") String userPW);
+
+    @GET("/get/login/{userId}/{userPW}")
+    Call<User> getUserInfo(@Path("userId") String userId,
+                           @Path("userPW") String userPW);
 }
