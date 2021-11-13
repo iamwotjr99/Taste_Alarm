@@ -15,7 +15,7 @@
         android:theme="@style/Theme.TasteAlarm"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".JoinActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".JoinActivity">
 
         </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
