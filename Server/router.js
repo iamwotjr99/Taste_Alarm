@@ -38,6 +38,8 @@ router.post('/post/join', (req, res) => {
     let userId = req.body.userId;
     let userPW = req.body.userPW;
 
+    console.log(nickname, userId, userPW);
+
     dbPool.getConnection((err, connection) => {
 
         if(err) {
@@ -57,8 +59,6 @@ router.post('/post/join', (req, res) => {
             connection.release();
         })
     })
-
-    console.log(nickname, userId, userPW);
 })
 
 // 로그인
