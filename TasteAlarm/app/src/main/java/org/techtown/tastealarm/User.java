@@ -34,7 +34,7 @@ public class User {
         this.userPW = userPW;
     }
 
-    public User(String userId, String nickname, String userPW) {
+    public User(String nickname, String userId, String userPW) {
         this.userId = userId;
         this.nickname = nickname;
         this.userPW = userPW;
