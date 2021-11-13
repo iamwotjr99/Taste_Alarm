@@ -1,5 +1,6 @@
 package org.techtown.tastealarm;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -110,6 +111,8 @@ public class JoinActivity extends AppCompatActivity {
                         Log.d("JoinActivity", "JoinFail: " + t.getMessage());
                     }
                 });
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
             }
         });
 
