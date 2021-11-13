@@ -33,10 +33,10 @@ router.get('/get/join/checkid/:userId', (req, res) => {
 })
 
 // 회원 가입
-router.post('/post/join', (req, res) => {
-    let nickname = req.body.nickname;
-    let userId = req.body.userId;
-    let userPW = req.body.userPW;
+router.post('/post/join/:nickname/:userId/:userPW', (req, res) => {
+    let nickname = req.params.nickname;
+    let userId = req.params.userId;
+    let userPW = req.params.userPW;
 
     console.log(nickname, userId, userPW);
 

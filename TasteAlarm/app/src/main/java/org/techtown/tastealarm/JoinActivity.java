@@ -96,9 +96,7 @@ public class JoinActivity extends AppCompatActivity {
                 String userId = etJoinID.getText().toString();
                 String userPW= etJoinPW.getText().toString();
 
-                User user = new User(nickname, userId, userPW);
-
-                Call<User> call = retrofitAPI.postJoinUser(user);
+                Call<User> call = retrofitAPI.postJoinUser(nickname, userId, userPW);
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
