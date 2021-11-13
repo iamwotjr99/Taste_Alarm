@@ -25,8 +25,8 @@ router.get('/get/join/checkid/:userId', (req, res) => {
             }
 
             connection.release();
-            console.log(result);
-            res.send(result);
+            console.log(result[0]);
+            res.send(result[0]);
             console.log('Check!');
         })
     })

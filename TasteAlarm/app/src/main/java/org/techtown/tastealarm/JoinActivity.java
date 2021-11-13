@@ -47,15 +47,14 @@ public class JoinActivity extends AppCompatActivity {
         btnJoinIDCheck = findViewById(R.id.join_check);
         btnJoin = findViewById(R.id.join_button);
 
-        String nickname = etJoinNickname.getText().toString();
-        String userId = etJoinID.getText().toString();
-        String userPW= etJoinPW.getText().toString();
-        String userPWCheck = etJoinPWCheck.getText().toString();
+
+        // String userPWCheck = etJoinPWCheck.getText().toString();
 
 
         btnJoinIDCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String userId = etJoinID.getText().toString();
                 if(etJoinID.length() == 0) {
                     tvCheckText.setText("아이디를 입력해주세요.");
                     tvCheckText.setTextColor(Color.parseColor("#FF0000"));
@@ -66,6 +65,7 @@ public class JoinActivity extends AppCompatActivity {
                         public void onResponse(Call<User> call, Response<User> response) {
                             if(response.isSuccessful()) {
                                 User getResult = response.body();
+                                Log.d("getCall", getResult.getUserId());
                                 if(getResult.getUserId() == null) {
                                     tvCheckText.setText("사용할 수 있는 아이디입니다.");
                                     tvCheckText.setTextColor(Color.parseColor("#00FF00"));
@@ -88,11 +88,16 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
-        User user = new User(userId, nickname, userPW);
-
         btnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String nickname = etJoinNickname.getText().toString();
+                String userId = etJoinID.getText().toString();
+                String userPW= etJoinPW.getText().toString();
+
+                User user = new User(nickname, userId, userPW);
+
                 Call<User> call = retrofitAPI.postJoinUser(user);
                 call.enqueue(new Callback<User>() {
                     @Override
