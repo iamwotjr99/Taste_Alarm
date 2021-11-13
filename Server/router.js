@@ -30,8 +30,6 @@ router.get('/get/join/checkid/:userId', (req, res) => {
             console.log('Check!');
         })
     })
-
-    
 })
 
 // 회원 가입
