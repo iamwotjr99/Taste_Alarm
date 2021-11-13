@@ -24,7 +24,7 @@ router.get('/get/join/checkid/:userId', (req, res) => {
                 return err;
             }
 
-            conn.release();
+            connection.release();
             console.log(result);
             res.send(result);
             console.log('Check!');
@@ -34,7 +34,7 @@ router.get('/get/join/checkid/:userId', (req, res) => {
 
 // 회원 가입
 router.post('/post/join', (req, res) => {
-    //let nickname = req.body.nickname;
+    let nickname = req.body.nickname;
     let userId = req.body.userId;
     let userPW = req.body.userPW;
 
