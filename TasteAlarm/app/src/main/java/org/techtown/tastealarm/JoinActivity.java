@@ -3,10 +3,13 @@ package org.techtown.tastealarm;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +30,9 @@ public class JoinActivity extends AppCompatActivity {
     private EditText etJoinPWCheck;
     private Button btnJoin;
     private TextView tvCheckText;
+    private ImageView ivCheckImg;
+    private int isPWCheck;
+    private int isIDCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,7 @@ public class JoinActivity extends AppCompatActivity {
         tvCheckText = findViewById(R.id.join_sign_text);
         btnJoinIDCheck = findViewById(R.id.join_check);
         btnJoin = findViewById(R.id.join_button);
+        ivCheckImg = findViewById(R.id.check_image);
 
 
         // String userPWCheck = etJoinPWCheck.getText().toString();
@@ -70,10 +77,12 @@ public class JoinActivity extends AppCompatActivity {
                                 if(getResult == null) {
                                     tvCheckText.setText("사용할 수 있는 아이디입니다.");
                                     tvCheckText.setTextColor(Color.parseColor("#00FF00"));
+                                    isIDCheck = 1;
                                     Log.d("JoinActivity", "사용할 수 있는 아이디 성공");
                                 } else {
                                     tvCheckText.setText("사용할 수 없는 아이디입니다.");
                                     tvCheckText.setTextColor(Color.parseColor("#FF0000"));
+                                    isIDCheck = 0;
                                     Log.d("JoinActivity", "사용할 수 없는 아이디 성공");
                                 }
                             }
@@ -85,6 +94,29 @@ public class JoinActivity extends AppCompatActivity {
                         }
                     });
                 }
+
+            }
+        });
+
+        etJoinPWCheck.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(etJoinPW.getText().toString().equals(etJoinPWCheck.getText().toString())) {
+                    ivCheckImg.setImageResource(R.drawable.check);
+                    isPWCheck = 1;
+                } else {
+                    ivCheckImg.setImageResource(R.drawable.close);
+                    isPWCheck = 0;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
 
             }
         });
@@ -111,8 +143,14 @@ public class JoinActivity extends AppCompatActivity {
                         Log.d("JoinActivity", "JoinFail: " + t.getMessage());
                     }
                 });
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
+                if(isIDCheck == 1 && isPWCheck == 1) {
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                } else if(isIDCheck == 1 && isPWCheck == 0) {
+                    Toast.makeText(getApplicationContext(), "비밀번호를 다시 확인해주세요", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "아이디를 중복확인 해주세요", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
