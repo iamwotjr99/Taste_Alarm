@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                             intent.putExtra("userId", result.getUserId());
                             intent.putExtra("userPW", result.getUserPW());
                             intent.putExtra("nickname", result.getNickname());
+                            startActivity(intent);
                         } else {
                             Log.d("getCall", "서버 연결 실패");
                         }
@@ -66,6 +67,14 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("JoinActivity", "IDCheckFail: " + t.getMessage());
                     }
                 });
+            }
+        });
+
+        tvJoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+                startActivity(intent);
             }
         });
     }

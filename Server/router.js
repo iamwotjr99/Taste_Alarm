@@ -68,7 +68,7 @@ router.get('/get/login/:userId/:userPW', (req, res) => {
     let userPW = req.params.userPW;
 
     console.log(userId, userPW);
-    
+
     dbPool.getConnection((err, connection) => {
         if(err) {
             err.code = 500;
@@ -76,7 +76,7 @@ router.get('/get/login/:userId/:userPW', (req, res) => {
             return err;
         }
 
-        let sql = 'SELECT * FROM user WHERE userID = ? AND userPW = ?'
+        let sql = 'SELECT * FROM user WHERE userID = ? AND password = ?'
         connection.query(sql, [userId, userPW], (err, result) => {
             if(err) {
                 err.code = 500;
