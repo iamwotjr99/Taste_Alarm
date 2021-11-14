@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-    android:id="@+id/home"
-    android:icon="@drawable/home"
-    android:title="Home"    />
+        android:id="@+id/home"
+        android:icon="@drawable/home"
+        android:title="홈"    />
 
     <item
         android:id="@+id/review"
         android:icon="@drawable/review"
-        android:title="Review"    />
+        android:title="리뷰"    />
 
     <item
-        android:id="@+id/User"
+        android:id="@+id/user"
         android:icon="@drawable/user"
-        android:title="User"    />
+        android:title="내정보"    />
 
 </menu>
