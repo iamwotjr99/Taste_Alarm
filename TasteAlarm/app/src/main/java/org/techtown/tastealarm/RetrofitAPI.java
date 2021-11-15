@@ -1,5 +1,7 @@
 package org.techtown.tastealarm;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -18,4 +20,7 @@ public interface RetrofitAPI {
     @GET("/get/login/{userId}/{userPW}")
     Call<User> getUserInfo(@Path("userId") String userId,
                            @Path("userPW") String userPW);
+
+    @GET("/get/restaurantList/{resList}")
+    Call<List<Restaurant>> getResList(@Path("resList") String resList);
 }
