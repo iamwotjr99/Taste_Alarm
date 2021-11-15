@@ -91,6 +91,33 @@ router.get('/get/login/:userId/:userPW', (req, res) => {
     })
 })
 
+// 맛집 리스트 가져오기
+router.get('/get/restaurantList/:resList', (req, res) => {
+    console.log(req.params.resList);
+
+    dbPool.getConnection((err, connection) => {
+        if(err) {
+            err.code = 500;
+            console.log("error");
+            return err;
+        }
+
+        let sql = 'SELECT * FROM famous_restaurant'
+        connection.query(sql, (err, result) => {
+            if(err) {
+                err.code = 500;
+                connection.release();
+                return err;
+            }
+
+            console.log(result);
+            res.send(result);
+            connection.release();
+            console.log("Get ResList Success!");
+        })
+    })
+})
+
 router.get('/taste', (req, res) => {
     res.send("hello world!");
 })
