@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const dbPool = require('./dbconfig');
 
+fs.readdir('./restaurant', (err, data) => {
+    for(let i = 0; i < data.length; i++) {
+        resData[i] = "http://ec2-15-164-230-128.ap-northeast-2.compute.amazonaws.com:8000/restaurant/" + data[i];
+    }
+    //console.log(resData);
+})
+
 // 아이디 중복 확인
 router.get('/get/join/checkid/:userId', (req, res) => {
     let userId = req.params.userId;
