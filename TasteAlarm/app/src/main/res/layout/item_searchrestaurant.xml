@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:text="식당이름"
         android:textSize="18dp"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:textColor="@color/black"/>
 
 </LinearLayout>
