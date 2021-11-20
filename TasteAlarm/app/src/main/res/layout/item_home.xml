@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/item_imageView"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
             android:text="TITLE"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@android:color/black"
             android:textStyle="bold"/>
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
             android:text="content"
-            android:textSize="17sp"
+            android:textSize="16sp"
             android:textColor="@android:color/darker_gray"/>
 
     </LinearLayout>
