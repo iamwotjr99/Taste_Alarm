@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const dbPool = require('./dbconfig');
+const fs = require('fs');
 
 fs.readdir('./restaurant', (err, data) => {
     for(let i = 0; i < data.length; i++) {
