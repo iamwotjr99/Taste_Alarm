@@ -1,6 +1,7 @@
 package org.techtown.tastealarm;
 
 public class Restaurant {
+    private String picture;
     private String restaurant_name;
     private String restaurant_address;
     private String category;
@@ -29,10 +30,18 @@ public class Restaurant {
         this.category = category;
     }
 
-    public Restaurant(String name, String address, String category) {
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public Restaurant(String name, String address, String picture) {
         this.restaurant_name = name;
         this.restaurant_address = address;
-        this.category = category;
+        this.picture = picture;
     }
 
     public Restaurant(String name, String address) {

@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
@@ -46,6 +48,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
         Restaurant list = mList.get(position);
         holder.tvTitle.setText(list.getName());
         holder.tvContent.setText(list.getAddress());
+        Glide.with(holder.ivImg.getContext())
+                .load(list.getPicture())
+                .override(80,80)
+                .into(holder.ivImg);
     }
 
 

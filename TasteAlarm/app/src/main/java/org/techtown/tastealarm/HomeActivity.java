@@ -65,7 +65,8 @@ public class HomeActivity extends Fragment implements OnMapReadyCallback {
                     List<Restaurant> result = response.body();
                     if(mList.size() != result.size()) {
                         for(int i = 0; i < result.size(); i++) {
-                            mList.add(new Restaurant(result.get(i).getName(), result.get(i).getAddress()));
+                            mList.add(new Restaurant(result.get(i).getName(), result.get(i).getAddress(),
+                                    result.get(i).getPicture()));
                             adapter.notifyDataSetChanged();
                         }
                     }
