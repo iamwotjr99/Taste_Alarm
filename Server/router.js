@@ -3,6 +3,8 @@ const router = express.Router();
 const dbPool = require('./dbconfig');
 const fs = require('fs');
 
+let resData = [];
+
 fs.readdir('./restaurant', (err, data) => {
     for(let i = 0; i < data.length; i++) {
         resData[i] = "http://ec2-15-164-230-128.ap-northeast-2.compute.amazonaws.com:8000/restaurant/" + data[i];
