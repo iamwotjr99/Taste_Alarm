@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TasteAlarm</string>
+    <string name="join"><u>회원가입</u></string>
 </resources>
