@@ -3,14 +3,14 @@ const router = express.Router();
 const dbPool = require('./dbconfig');
 const fs = require('fs');
 
-let resData = [];
+// let resData = [];
 
-fs.readdir('./restaurant', (err, data) => {
-    for(let i = 0; i < data.length; i++) {
-        resData[i] = "http://ec2-15-164-230-128.ap-northeast-2.compute.amazonaws.com:8000/restaurant/" + data[i];
-    }
-    //console.log(resData);
-})
+// fs.readdir('./restaurant', (err, data) => {
+//     for(let i = 0; i < data.length; i++) {
+//         resData[i] = "http://ec2-15-164-230-128.ap-northeast-2.compute.amazonaws.com:8000/restaurant/" + data[i];
+//     }
+//     //console.log(resData);
+// })
 
 // 아이디 중복 확인
 router.get('/get/join/checkid/:userId', (req, res) => {
@@ -124,6 +124,34 @@ router.get('/get/restaurantList/:resList', (req, res) => {
             res.send(result);
             connection.release();
             console.log("Get ResList Success!");
+        })
+    })
+})
+
+// 맛집에 맞는 메뉴 가져오기
+router.get('/get/restaurantMenu/:id', (req, res) => {
+    let resID = req.params.id;
+    console.log(resID);
+
+    dbPool.getConnection((err, connection) => {
+        if(err) {
+            err.code = 500;
+            console.log("error");
+            return err;
+        }
+
+        let sql = 'SELECT * FROM restaurant_menu WHERE id=?'
+        connection.query(sql, resID, (err, result) => {
+            if(err) {
+                err.code = 500;
+                connection.release();
+                return err;
+            }
+
+            console.log(result);
+            res.send(result);
+            connection.release();
+            console.log("GET MenuList Success!");
         })
     })
 })

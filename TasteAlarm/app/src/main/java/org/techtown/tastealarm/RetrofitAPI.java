@@ -23,4 +23,7 @@ public interface RetrofitAPI {
 
     @GET("/get/restaurantList/{resList}")
     Call<List<Restaurant>> getResList(@Path("resList") String resList);
+
+    @GET("/get/restaurantMenu/{id}")
+    Call<List<Menu>> getResMenu(@Path("id") int resID);
 }

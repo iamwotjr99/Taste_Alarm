@@ -1,10 +1,20 @@
 package org.techtown.tastealarm;
 
 public class Restaurant {
+    private int id;
     private String picture;
     private String restaurant_name;
     private String restaurant_address;
     private String category;
+    private String restaurant_classificationfamous_restaurant;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return restaurant_name;
@@ -47,5 +57,13 @@ public class Restaurant {
     public Restaurant(String name, String address) {
         this.restaurant_name = name;
         this.restaurant_address = address;
+    }
+
+    public Restaurant(int id, String name, String address, String category, String picture) {
+        this.id = id;
+        this.restaurant_name = name;
+        this.restaurant_address = address;
+        this.restaurant_classificationfamous_restaurant = category;
+        this.picture = picture;
     }
 }
