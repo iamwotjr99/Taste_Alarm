@@ -10,15 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/layout_border"
-        android:backgroundTint="@null"
         android:layout_margin="5dp"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:iconifiedByDefault="false"
         android:queryHint="식당 검색"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/review_textView"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintBottom_toTopOf="@id/review_textView" />
 
     <TextView
         android:id="@+id/review_textView"
@@ -35,19 +33,18 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/review_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="650dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="-167dp" />
+        android:layout_height="600dp"
+        app:layout_constraintBottom_toTopOf="@id/review_textView"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addreview_button"
+        android:id="@+id/addReview_float_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:backgroundTint="@color/indigo_100"
         app:srcCompat="@android:drawable/ic_input_add"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="330dp"
-        tools:layout_editor_absoluteY="650dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

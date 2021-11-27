@@ -5,7 +5,6 @@ public class Restaurant {
     private String picture;
     private String restaurant_name;
     private String restaurant_address;
-    private String category;
     private String restaurant_classificationfamous_restaurant;
 
     public int getId() {
@@ -33,11 +32,11 @@ public class Restaurant {
     }
 
     public String getCategory() {
-        return category;
+        return restaurant_classificationfamous_restaurant;
     }
 
     public void setCategory(String category) {
-        this.category = category;
+        this.restaurant_classificationfamous_restaurant = category;
     }
 
     public String getPicture() {
@@ -54,16 +53,16 @@ public class Restaurant {
         this.picture = picture;
     }
 
-    public Restaurant(String name, String address) {
-        this.restaurant_name = name;
-        this.restaurant_address = address;
-    }
-
     public Restaurant(int id, String name, String address, String category, String picture) {
         this.id = id;
         this.restaurant_name = name;
         this.restaurant_address = address;
         this.restaurant_classificationfamous_restaurant = category;
         this.picture = picture;
+    }
+
+    public Restaurant(int id, String restaurant_name) {
+        this.id = id;
+        this.restaurant_name = restaurant_name;
     }
 }

@@ -2,15 +2,21 @@ const express = require('express');
 const router = express.Router();
 const dbPool = require('./dbconfig');
 const fs = require('fs');
+const multer = require('multer');
+const path = require('path');
 
-// let resData = [];
-
-// fs.readdir('./restaurant', (err, data) => {
-//     for(let i = 0; i < data.length; i++) {
-//         resData[i] = "http://ec2-15-164-230-128.ap-northeast-2.compute.amazonaws.com:8000/restaurant/" + data[i];
-//     }
-//     //console.log(resData);
-// })
+let i = 0;
+let j = 0;
+const upload = multer({
+    storage: multer.diskStorage({
+      destination: function (req, file, cb) {
+        cb(null, 'reviewimages/');
+      },
+      filename: function (req, file, cb) {
+        cb(null, ++i+"_"+file.originalname);
+      }
+    }),
+  });
 
 // 아이디 중복 확인
 router.get('/get/join/checkid/:userId', (req, res) => {
@@ -152,6 +158,82 @@ router.get('/get/restaurantMenu/:id', (req, res) => {
             res.send(result);
             connection.release();
             console.log("GET MenuList Success!");
+        })
+    })
+})
+
+// 리뷰 이미지와 함께 리뷰 저장
+router.post('/post/uploadImage/:userID/res/:resName/:content', upload.single('file'), (req, res) => {
+    let userID = req.params.userID;
+    let resName = req.params.resName;
+    let content = req.params.content;
+    let url = ""
+
+    let file = req.file;
+    let originalName = "";
+    let fileName = "";
+    let mimeType = "";
+    let size = 0;
+    
+    if(file) {
+        originalName = file.originalname;
+        fileName = file.filename;
+        mimeType = file.mimetype;
+        size = file.size;
+        console.log("execute" + fileName);
+    } else {
+        console.log("Request is null");
+    }
+
+    url = "http://172.23.7.189:8000/reviewimages/" + ++j+"_"+file.originalname;
+    console.log(req.file);
+    console.log(req.body);
+    console.log(url);
+
+    dbPool.getConnection((err, connection) => {
+        if(err) {
+            err.code = 500;
+            console.log("error");
+            return err;
+        }
+
+        let sql = "INSERT INTO review (user_id, title, content, picture) VALUES(?, ?, ?, ?);"
+        connection.query(sql, [userID, resName, content, url], (err, result) => {
+            if(err) {
+                err.code = 500;
+                connection.release();
+                return err;
+            }
+
+            console.log(result);
+            console.log("Post review success!");
+            connection.release();
+        })
+    })
+})
+
+// 리뷰 가져오기
+router.get('/get/reviewList/:reviewList', (req, res) => {
+    dbPool.getConnection((err, connection) => {
+        if(err) {
+            err.code = 500;
+            console.log("error");
+            return err;
+        }
+
+        let sql = "SELECT * FROM review"
+
+        connection.query(sql, (err, result) => {
+            if(err) {
+                err.code = 500;
+                connection.release();
+                return err;
+            }
+
+            console.log(result);
+            console.log("Get review Success!");
+            res.send(result);
+            connection.release();
         })
     })
 })

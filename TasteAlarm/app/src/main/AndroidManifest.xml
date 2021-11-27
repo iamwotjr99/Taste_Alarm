@@ -26,10 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".JoinActivity">
-
-        </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".JoinActivity"/>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".HomeSearchActivity"/>
+        <activity android:name=".RestaurantActivity"/>
+        <activity android:name=".ReviewAddActivity"/>
     </application>
 
 </manifest>

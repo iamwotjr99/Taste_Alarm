@@ -7,11 +7,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
@@ -19,6 +21,7 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.util.FusedLocationSource;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,10 +37,13 @@ public class HomeActivity extends Fragment implements OnMapReadyCallback {
     private HomeAdapter adapter;
     private NaverMap naverMap;
     private FusedLocationSource locationSource;
+    private SearchView searchView;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        searchView = view.findViewById(R.id.home_searchview);
 
         FragmentManager fm = getActivity().getSupportFragmentManager();
         MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.home_naverMap);
@@ -65,8 +71,8 @@ public class HomeActivity extends Fragment implements OnMapReadyCallback {
                     List<Restaurant> result = response.body();
                     if(mList.size() != result.size()) {
                         for(int i = 0; i < result.size(); i++) {
-                            mList.add(new Restaurant(result.get(i).getName(), result.get(i).getAddress(),
-                                    result.get(i).getPicture()));
+                            mList.add(new Restaurant(result.get(i).getId(), result.get(i).getName(), result.get(i).getAddress(),
+                                    result.get(i).getCategory(), result.get(i).getPicture()));
                             adapter.notifyDataSetChanged();
                         }
                     }
@@ -84,6 +90,16 @@ public class HomeActivity extends Fragment implements OnMapReadyCallback {
 
         adapter = new HomeAdapter(mList);
         recyclerView.setAdapter(adapter);
+
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), HomeSearchActivity.class);
+                intent.putExtra("list", (Serializable) mList);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 
