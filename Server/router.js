@@ -185,7 +185,7 @@ router.post('/post/uploadImage/:userID/res/:resName/:content', upload.single('fi
         console.log("Request is null");
     }
 
-    url = "http://172.23.7.189:8000/reviewimages/" + ++j+"_"+file.originalname;
+    url = "http://ec2-15-164-230-128.ap-northeast-2.compute.amazonaws.com:8000/reviewimages/" + ++j+"_"+file.originalname;
     console.log(req.file);
     console.log(req.body);
     console.log(url);
