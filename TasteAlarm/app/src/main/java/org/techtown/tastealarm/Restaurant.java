@@ -1,6 +1,8 @@
 package org.techtown.tastealarm;
 
-public class Restaurant {
+import java.io.Serializable;
+
+public class Restaurant implements Serializable{
     private int id;
     private String picture;
     private String restaurant_name;

@@ -34,7 +34,10 @@ public class MainActivity extends AppCompatActivity {
         bundle.putString("userPW", userPW);
 
         frag_home = new HomeActivity();
+
         frag_review = new ReviewActivity();
+        frag_review.setArguments(bundle);
+
         frag_myInfo = new UserActivity();
         frag_myInfo.setArguments(bundle);
 
