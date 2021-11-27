@@ -212,6 +212,34 @@ router.post('/post/uploadImage/:userID/res/:resName/:content', upload.single('fi
     })
 })
 
+// 이미지 없는 리뷰 추가하기
+router.post('/post/uploadReview/:userID/res/:resName/:content', (req, res) => {
+    let userID = req.params.userID;
+    let resName = req.params.resName;
+    let content = req.params.content;
+
+    dbPool.getConnection((err, connection) => {
+        if(err) {
+            err.code = 500;
+            console.log('error');
+            return err;
+        }
+
+        let sql = "INSERT INTO review (user_id, title, content) VALUES(?, ?, ?);"
+        connection.query(sql, [userID, resName, content], (err, result) => {
+            if(err) {
+                err.code = 500;
+                connection.release();
+                return err;
+            }
+
+            console.log(result);
+            console.log("Post No Image review success!");
+            connection.release();
+        })
+    })
+})
+
 // 리뷰 가져오기
 router.get('/get/reviewList/:reviewList', (req, res) => {
     dbPool.getConnection((err, connection) => {
