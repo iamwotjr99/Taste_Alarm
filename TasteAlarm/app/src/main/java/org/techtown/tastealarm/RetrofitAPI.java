@@ -32,8 +32,12 @@ public interface RetrofitAPI {
 
     @Multipart
     @POST("/post/uploadImage/{userID}/res/{resName}/{content}")
-    Call<Review> postReview(@Part MultipartBody.Part file, @Path("userID") int user_id,
+    Call<Review> postImgReview(@Part MultipartBody.Part file, @Path("userID") int user_id,
                             @Path("resName") String resName, @Path("content") String content);
+
+    @POST("/post/uploadReview/{userID}/res/{resName}/{content}")
+    Call<Review> postReview(@Path("userID") int user_id, @Path("resName") String resName,
+                            @Path("content") String content);
 
     @GET("/get/reviewList/{reviewList}")
     Call<List<Review>> getReviewList(@Path("reviewList") String reviewList);

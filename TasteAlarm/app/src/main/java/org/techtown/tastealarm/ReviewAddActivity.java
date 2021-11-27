@@ -38,7 +38,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ReviewAddActivity extends AppCompatActivity {
     private final int GET_GALLERY_IMAGE = 200;
-    private int IMAGE_STATE_CODE = 0;
     private Bitmap bitmap;
     private Uri imageUri;
     private EditText etAddReviewContent;
@@ -95,24 +94,40 @@ public class ReviewAddActivity extends AppCompatActivity {
                 String resName = autoCompleteTextView.getText().toString();
                 String reviewContent = etAddReviewContent.getText().toString();
 
-                File file = imageToFile(imageUri);
-                RequestBody requestFile = RequestBody.create(MediaType.parse("jpeg/*"), file);
+                if(imageUri != null) {
+                    File file = imageToFile(imageUri);
+                    RequestBody requestFile = RequestBody.create(MediaType.parse("jpeg/*"), file);
 
-                MultipartBody.Part body = MultipartBody.Part.createFormData("file", resName+id+".jpg", requestFile);
+                    MultipartBody.Part body = MultipartBody.Part.createFormData("file", resName+id+".jpg", requestFile);
 
-                Call<Review> call = retrofitAPI.postReview(body, id, resName, reviewContent);
-                call.enqueue(new Callback<Review>() {
-                    @Override
-                    public void onResponse(Call<Review> call, Response<Review> response) {
-                        Review result = response.body();
-                        Log.d("ReviewAddRes", String.valueOf(result));
-                    }
+                    Call<Review> call = retrofitAPI.postImgReview(body, id, resName, reviewContent);
+                    call.enqueue(new Callback<Review>() {
+                        @Override
+                        public void onResponse(Call<Review> call, Response<Review> response) {
+                            Review result = response.body();
+                            Log.d("ReviewAddRes", String.valueOf(result));
+                        }
 
-                    @Override
-                    public void onFailure(Call<Review> call, Throwable t) {
-                        Log.d("ReviewAddFai;", t.getMessage());
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<Review> call, Throwable t) {
+                            Log.d("ReviewAddFai;", t.getMessage());
+                        }
+                    });
+                } else {
+                    Call<Review> call = retrofitAPI.postReview(id, resName, reviewContent);
+                    call.enqueue(new Callback<Review>() {
+                        @Override
+                        public void onResponse(Call<Review> call, Response<Review> response) {
+                            Review result = response.body();
+                            Log.d("ReviewAddRes", String.valueOf(result));
+                        }
+
+                        @Override
+                        public void onFailure(Call<Review> call, Throwable t) {
+                            Log.d("ReviewAddFai;", t.getMessage());
+                        }
+                    });
+                }
                 finish();
             }
         });
@@ -122,7 +137,6 @@ public class ReviewAddActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK) {
-            IMAGE_STATE_CODE = 1;
             imageUri = data.getData();
             ivSelectedImg.setImageURI(imageUri);
 

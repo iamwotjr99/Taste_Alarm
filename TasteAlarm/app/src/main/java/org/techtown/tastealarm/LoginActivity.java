@@ -1,5 +1,7 @@
 package org.techtown.tastealarm;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,11 +54,25 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<User> call, Response<User> response) {
                         if(response.isSuccessful()) {
                             User result = response.body();
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            intent.putExtra("userId", result.getUserId());
-                            intent.putExtra("userPW", result.getUserPW());
-                            intent.putExtra("nickname", result.getNickname());
-                            startActivity(intent);
+                            if(result != null) {
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.putExtra("id", result.getId());
+                                intent.putExtra("userId", result.getUserId());
+                                intent.putExtra("userPW", result.getUserPW());
+                                intent.putExtra("nickname", result.getNickname());
+                                startActivity(intent);
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                builder.setTitle("로그인 실패").setMessage("아이디 혹은 비빌번호를 다시 입력해주세요.");
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+                                AlertDialog alertDialog = builder.create();
+                                alertDialog.show();
+                            }
                         } else {
                             Log.d("getCall", "서버 연결 실패");
                         }

@@ -49,12 +49,19 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Review list = mList.get(position);
-        holder.tvTitle.setText(list.getTitle());
-        holder.tvContent.setText(list.getContent());
-        Glide.with(holder.ivImg.getContext())
-                .load(list.getPicture())
-                .override(80, 80)
-                .into(holder.ivImg);
+        if(list.getPicture() != null) {
+            holder.tvTitle.setText(list.getTitle());
+            holder.tvContent.setText(list.getContent());
+            holder.ivImg.setVisibility(View.VISIBLE);
+            Glide.with(holder.ivImg.getContext())
+                    .load(list.getPicture())
+                    .override(80, 80)
+                    .into(holder.ivImg);
+        } else {
+            holder.tvTitle.setText(list.getTitle());
+            holder.tvContent.setText(list.getContent());
+            holder.ivImg.setVisibility(View.GONE);
+        }
     }
 
     @Override
