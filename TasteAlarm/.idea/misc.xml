@@ -35,6 +35,9 @@
         <entry key="..\:/Users/iamwo/GitHub/Taste_Alarm/Taste_Alarm/TasteAlarm/app/src/main/res/layout/item_review.xml" value="0.1778115501519757" />
         <entry key="..\:/Users/iamwo/GitHub/Taste_Alarm/Taste_Alarm/TasteAlarm/app/src/main/res/layout/item_searchrestaurant.xml" value="0.1778115501519757" />
         <entry key="..\:/Users/iamwo/GitHub/Taste_Alarm/Taste_Alarm/TasteAlarm/app/src/main/res/layout/item_searchview.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_user.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/item_noticerestaurant.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/item_user.xml" value="0.4036458333333333" />
       </map>
     </option>
   </component>
