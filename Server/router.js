@@ -163,10 +163,11 @@ router.get('/get/restaurantMenu/:id', (req, res) => {
 })
 
 // 리뷰 이미지와 함께 리뷰 저장
-router.post('/post/uploadImage/:userID/res/:resName/:content', upload.single('file'), (req, res) => {
+router.post('/post/uploadImage/:userID/res/:resName/:content/:nickname', upload.single('file'), (req, res) => {
     let userID = req.params.userID;
     let resName = req.params.resName;
     let content = req.params.content;
+    let nickname = req.params.nickname;
     let url = ""
 
     let file = req.file;
@@ -185,7 +186,7 @@ router.post('/post/uploadImage/:userID/res/:resName/:content', upload.single('fi
         console.log("Request is null");
     }
 
-    url = "http://ec2-15-164-230-128.ap-northeast-2.compute.amazonaws.com:8000/reviewimages/" + ++j+"_"+file.originalname;
+    url = "http://172.23.7.189:8000/reviewimages/" + ++j+"_"+file.originalname;
     console.log(req.file);
     console.log(req.body);
     console.log(url);
@@ -197,8 +198,8 @@ router.post('/post/uploadImage/:userID/res/:resName/:content', upload.single('fi
             return err;
         }
 
-        let sql = "INSERT INTO review (user_id, title, content, picture) VALUES(?, ?, ?, ?);"
-        connection.query(sql, [userID, resName, content, url], (err, result) => {
+        let sql = "INSERT INTO review (user_id, title, content, picture, userName) VALUES(?, ?, ?, ?, ?);"
+        connection.query(sql, [userID, resName, content, url,nickname], (err, result) => {
             if(err) {
                 err.code = 500;
                 connection.release();
@@ -206,17 +207,18 @@ router.post('/post/uploadImage/:userID/res/:resName/:content', upload.single('fi
             }
 
             console.log(result);
-            console.log("Post review success!");
+            console.log("Post Image review success!");
             connection.release();
         })
     })
 })
 
 // 이미지 없는 리뷰 추가하기
-router.post('/post/uploadReview/:userID/res/:resName/:content', (req, res) => {
+router.post('/post/uploadReview/:userID/res/:resName/:content/:nickname', (req, res) => {
     let userID = req.params.userID;
     let resName = req.params.resName;
     let content = req.params.content;
+    let nickname = req.params.nickname;
 
     dbPool.getConnection((err, connection) => {
         if(err) {
@@ -225,8 +227,8 @@ router.post('/post/uploadReview/:userID/res/:resName/:content', (req, res) => {
             return err;
         }
 
-        let sql = "INSERT INTO review (user_id, title, content) VALUES(?, ?, ?);"
-        connection.query(sql, [userID, resName, content], (err, result) => {
+        let sql = "INSERT INTO review (user_id, title, content, userName) VALUES(?, ?, ?, ?);"
+        connection.query(sql, [userID, resName, content, nickname], (err, result) => {
             if(err) {
                 err.code = 500;
                 connection.release();
@@ -261,6 +263,34 @@ router.get('/get/reviewList/:reviewList', (req, res) => {
             console.log(result);
             console.log("Get review Success!");
             res.send(result);
+            connection.release();
+        })
+    })
+})
+
+// 유저 id에 맞는 리뷰 가져오기
+router.get('/get/userInfo/reviews/:userID', (req,res) => {
+    let userID = req.params.userID;
+    console.log(userID);
+
+    dbPool.getConnection((err, connection) => {
+        if(err) {
+            err.code = 500;
+            console.log('error');
+            return err;
+        }
+
+        let sql = "SELECT * from review WHERE user_id = ?"
+        connection.query(sql, userID, (err, result) => {
+            if(err) {
+                err.code = 500;
+                connection.release();
+                return err;
+            }
+
+            console.log(result);
+            res.send(result);
+            console.log("Get userID review success!");
             connection.release();
         })
     })

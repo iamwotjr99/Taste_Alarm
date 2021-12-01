@@ -3,6 +3,7 @@ package org.techtown.tastealarm;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,9 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
+    private List<Review> mListAll;
     private List<Review> mList;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -34,6 +38,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
     public ReviewAdapter(List<Review> list) {
         this.mList = list;
+        mListAll = new ArrayList<>(list);
     }
 
     @NonNull
@@ -52,6 +57,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         if(list.getPicture() != null) {
             holder.tvTitle.setText(list.getTitle());
             holder.tvContent.setText(list.getContent());
+            holder.tvName.setText(list.getUserName());
             holder.ivImg.setVisibility(View.VISIBLE);
             Glide.with(holder.ivImg.getContext())
                     .load(list.getPicture())
@@ -60,6 +66,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         } else {
             holder.tvTitle.setText(list.getTitle());
             holder.tvContent.setText(list.getContent());
+            holder.tvName.setText(list.getUserName());
             holder.ivImg.setVisibility(View.GONE);
         }
     }
@@ -69,5 +76,36 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         return mList.size();
     }
 
+    public Filter getFilter() {
+        return reviewFilter;
+    }
+
+    private Filter reviewFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<Review> filteredList = new ArrayList<>();
+
+            if(charSequence == null || charSequence.length() == 0) {
+                filteredList.addAll(mListAll);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (Review data : mListAll) {
+                    if(data.getTitle().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(data);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            mList.clear();
+            mList.addAll((List)filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
 }

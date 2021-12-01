@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -30,6 +31,7 @@ public class ReviewActivity extends Fragment{
     private List<Review> reviewList = new ArrayList<>();
     private ReviewAdapter reviewAdapter;
     private int k = 0;
+    private SearchView searchView;
 
     FloatingActionButton floatingActionButton;
 
@@ -45,6 +47,19 @@ public class ReviewActivity extends Fragment{
     public void onResume() {
         super.onResume();
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                reviewAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
+
         Call<List<Review>> reviewCall = retrofitAPI.getReviewList("getReviewList");
         reviewCall.enqueue(new Callback<List<Review>>() {
             @Override
@@ -54,11 +69,12 @@ public class ReviewActivity extends Fragment{
                     for(int i = k; i < result.size(); i++) {
                         if(reviewList.size() != result.size()) {
                             reviewList.add(new Review(result.get(i).getTitle(), result.get(i).getContent(),
-                                    result.get(i).getPicture()));
+                                    result.get(i).getPicture(), result.get(i).getUserName()));
                             k++;
                             reviewAdapter.notifyDataSetChanged();
                         }
                     }
+
                 }
             }
 
@@ -72,15 +88,23 @@ public class ReviewActivity extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_review, container, false);
 
+        searchView = view.findViewById(R.id.review_searchview);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                reviewAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
+
         int id = getArguments().getInt("id");
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ServerURL.SERVER_URL)
-                .addConverterFactory(new NullOnEmptyConverterFactory())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
+        String nickname = getArguments().getString("nickname");
 
         Call<List<Restaurant>> call = retrofitAPI.getResList("getResList");
         call.enqueue(new Callback<List<Restaurant>>() {
@@ -111,7 +135,7 @@ public class ReviewActivity extends Fragment{
                     for(int i = k; i < result.size(); i++) {
                         if(reviewList.size() != result.size()) {
                             reviewList.add(new Review(result.get(i).getTitle(), result.get(i).getContent(),
-                                    result.get(i).getPicture()));
+                                    result.get(i).getPicture(), result.get(i).getUserName()));
                             k++;
                             reviewAdapter.notifyDataSetChanged();
                         }
@@ -139,6 +163,7 @@ public class ReviewActivity extends Fragment{
                 Intent intent = new Intent(getContext(), ReviewAddActivity.class);
                 intent.putExtra("list", (Serializable) restaurantList);
                 intent.putExtra("id", id);
+                intent.putExtra("nickname", nickname);
                 startActivity(intent);
             }
         });

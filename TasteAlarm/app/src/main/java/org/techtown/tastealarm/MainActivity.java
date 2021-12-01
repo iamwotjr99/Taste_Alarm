@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -18,17 +19,20 @@ public class MainActivity extends AppCompatActivity {
     private String nickname;
     private String userID;
     private String userPW;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        id = getIntent().getIntExtra("id", 0);
         nickname = getIntent().getExtras().getString("nickname");
         userID = getIntent().getExtras().getString("userId");
         userPW = getIntent().getExtras().getString("userPW");
 
         Bundle bundle = new Bundle();
+        bundle.putInt("id", id);
         bundle.putString("nickname", nickname);
         bundle.putString("userId", userID);
         bundle.putString("userPW", userPW);
@@ -74,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
                         return false;
                     }
                 });
+
+
     }
 
 }

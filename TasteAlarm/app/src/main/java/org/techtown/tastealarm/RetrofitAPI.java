@@ -41,4 +41,7 @@ public interface RetrofitAPI {
 
     @GET("/get/reviewList/{reviewList}")
     Call<List<Review>> getReviewList(@Path("reviewList") String reviewList);
+
+    @GET("/get/userInfo/reviews/{userID}")
+    Call<List<Review>> getUserReviews(@Path("userID") int user_id);
 }
