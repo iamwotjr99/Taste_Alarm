@@ -10,7 +10,7 @@ let j = 0;
 const upload = multer({
     storage: multer.diskStorage({
       destination: function (req, file, cb) {
-        cb(null, 'SERVER/reviewimages/');
+        cb(null, 'reviewimages/');
       },
       filename: function (req, file, cb) {
         cb(null, ++i+"_"+file.originalname);
