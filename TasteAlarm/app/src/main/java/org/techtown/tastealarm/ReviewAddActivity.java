@@ -53,6 +53,7 @@ public class ReviewAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_addreview);
 
         int id = getIntent().getIntExtra("id", 0);
+        String nickname = getIntent().getStringExtra("nickname");
 
         etAddReviewContent = findViewById(R.id.addReview_content);
         btnAddPhoto = findViewById(R.id.addPhoto_btn);
@@ -100,7 +101,7 @@ public class ReviewAddActivity extends AppCompatActivity {
 
                     MultipartBody.Part body = MultipartBody.Part.createFormData("file", resName+id+".jpg", requestFile);
 
-                    Call<Review> call = retrofitAPI.postImgReview(body, id, resName, reviewContent);
+                    Call<Review> call = retrofitAPI.postImgReview(body, id, resName, reviewContent, nickname);
                     call.enqueue(new Callback<Review>() {
                         @Override
                         public void onResponse(Call<Review> call, Response<Review> response) {
@@ -114,7 +115,7 @@ public class ReviewAddActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    Call<Review> call = retrofitAPI.postReview(id, resName, reviewContent);
+                    Call<Review> call = retrofitAPI.postReview(id, resName, reviewContent, nickname);
                     call.enqueue(new Callback<Review>() {
                         @Override
                         public void onResponse(Call<Review> call, Response<Review> response) {
@@ -128,6 +129,7 @@ public class ReviewAddActivity extends AppCompatActivity {
                         }
                     });
                 }
+
                 finish();
             }
         });

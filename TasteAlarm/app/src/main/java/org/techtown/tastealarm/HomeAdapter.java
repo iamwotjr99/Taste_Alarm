@@ -16,6 +16,12 @@ import java.util.List;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
     private List<Restaurant> mList;
 
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position);
+    }
+
+    private OnItemClickListener mListener = null;
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivImg;
         TextView tvTitle;
@@ -27,11 +33,25 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
             ivImg = itemView.findViewById(R.id.item_imageView);
             tvTitle = itemView.findViewById(R.id.item_title);
             tvContent = itemView.findViewById(R.id.item_content);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        mListener.onItemClick(view, position);
+                    }
+                }
+            });
         }
     }
 
     public HomeAdapter(List<Restaurant> list) {
         this.mList = list;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mListener = listener;
     }
 
     @Override

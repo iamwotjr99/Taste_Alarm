@@ -31,13 +31,14 @@ public interface RetrofitAPI {
     Call<List<Menu>> getResMenu(@Path("id") int resID);
 
     @Multipart
-    @POST("/post/uploadImage/{userID}/res/{resName}/{content}")
+    @POST("/post/uploadImage/{userID}/res/{resName}/{content}/{nickname}")
     Call<Review> postImgReview(@Part MultipartBody.Part file, @Path("userID") int user_id,
-                            @Path("resName") String resName, @Path("content") String content);
+                               @Path("resName") String resName, @Path("content") String content,
+                               @Path("nickname") String nickname);
 
-    @POST("/post/uploadReview/{userID}/res/{resName}/{content}")
+    @POST("/post/uploadReview/{userID}/res/{resName}/{content}/{nickname}")
     Call<Review> postReview(@Path("userID") int user_id, @Path("resName") String resName,
-                            @Path("content") String content);
+                            @Path("content") String content, @Path("nickname") String nickname);
 
     @GET("/get/reviewList/{reviewList}")
     Call<List<Review>> getReviewList(@Path("reviewList") String reviewList);
