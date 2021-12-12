@@ -186,7 +186,7 @@ router.post('/post/uploadImage/:userID/res/:resName/:content/:nickname', upload.
         console.log("Request is null");
     }
 
-    url = "http://172.23.7.189:8000/reviewimages/" + ++j+"_"+file.originalname;
+    url = "http://ec2-15-164-230-128.ap-northeast-2.compute.amazonaws.com:8000/reviewimages/" + ++j+"_"+file.originalname;
     console.log(req.file);
     console.log(req.body);
     console.log(url);
@@ -251,7 +251,7 @@ router.get('/get/reviewList/:reviewList', (req, res) => {
             return err;
         }
 
-        let sql = "SELECT * FROM review"
+        let sql = "SELECT * FROM review order by id desc"
 
         connection.query(sql, (err, result) => {
             if(err) {
