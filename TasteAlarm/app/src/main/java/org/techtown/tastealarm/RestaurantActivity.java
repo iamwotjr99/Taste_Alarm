@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,6 +43,9 @@ public class RestaurantActivity extends AppCompatActivity {
         tvResCategory = findViewById(R.id.notice_restaurant_category);
         ivResPicture = findViewById(R.id.notice_restaurant_imageview);
         btnBack = findViewById(R.id.notice_restaurant_backBtn);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         int resID = getIntent().getIntExtra("resID",1);
         String resName = getIntent().getStringExtra("resName");

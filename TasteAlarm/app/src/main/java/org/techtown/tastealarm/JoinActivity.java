@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import retrofit2.Call;
@@ -38,6 +39,9 @@ public class JoinActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ServerURL.SERVER_URL)
