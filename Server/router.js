@@ -198,8 +198,8 @@ router.post('/post/uploadImage/:userID/res/:resName/:content/:nickname', upload.
             return err;
         }
 
-        let sql = "INSERT INTO review (user_id, title, content, picture, userName) VALUES(?, ?, ?, ?, ?);"
-        connection.query(sql, [userID, resName, content, url,nickname], (err, result) => {
+        let sql = "INSERT INTO review (user_id, userName, title, content, picture) VALUES(?, ?, ?, ?, ?);"
+        connection.query(sql, [userID, nickname, resName, content, url], (err, result) => {
             if(err) {
                 err.code = 500;
                 connection.release();

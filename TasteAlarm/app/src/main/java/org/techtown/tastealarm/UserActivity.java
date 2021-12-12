@@ -45,7 +45,7 @@ public class UserActivity extends Fragment {
         tvCount = view.findViewById(R.id.review_count);
 
         userID = getArguments().getString("userId");
-        Log.d("userActivity", userID);
+        //Log.d("userActivity", userID);
         nickname = getArguments().getString("nickname");
         id = getArguments().getInt("id");
 

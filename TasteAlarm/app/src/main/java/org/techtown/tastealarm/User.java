@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class User implements Serializable {
     private int id;
 
-    private String userId;
+    private String userID;
 
     private String nickname;
 
@@ -21,11 +21,11 @@ public class User implements Serializable {
     }
 
     public String getUserId() {
-        return userId;
+        return userID;
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        this.userID = userId;
     }
 
     public String getNickname() {
@@ -44,8 +44,8 @@ public class User implements Serializable {
         this.userPW = userPW;
     }
 
-    public User(String nickname, String userId, String userPW) {
-        this.userId = userId;
+    public User(String nickname, String userID, String userPW) {
+        this.userID = userID;
         this.nickname = nickname;
         this.userPW = userPW;
     }
