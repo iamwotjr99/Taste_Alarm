@@ -227,8 +227,8 @@ router.post('/post/uploadReview/:userID/res/:resName/:content/:nickname', (req, 
             return err;
         }
 
-        let sql = "INSERT INTO review (user_id, title, content, userName) VALUES(?, ?, ?, ?);"
-        connection.query(sql, [userID, resName, content, nickname], (err, result) => {
+        let sql = "INSERT INTO review (user_id, userName, title, content) VALUES(?, ?, ?, ?);"
+        connection.query(sql, [userID, nickname, resName, content], (err, result) => {
             if(err) {
                 err.code = 500;
                 connection.release();
