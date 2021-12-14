@@ -24,7 +24,7 @@ public class TasteAlarmService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Intent alarmIntent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent alarmIntent = new Intent(getApplicationContext(), LoginActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
                 alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
@@ -37,9 +37,11 @@ public class TasteAlarmService extends Service {
             notificationManager.createNotificationChannel(channel);
         }
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "CHANNEL_ID")
-                .setSmallIcon(R.drawable.chicken)
+                .setSmallIcon(R.drawable.chicken_white)
                 .setContentTitle("맛알람")
                 .setContentText("주변에 맛집이 있어요! 터치하면 확인 하실 수 있습니다!")
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         notificationManager.notify(1, builder.build());
