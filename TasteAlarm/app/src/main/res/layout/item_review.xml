@@ -35,8 +35,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:text="name"
             android:textColor="@color/grey_700"
             android:textSize="16dp" />
@@ -45,13 +45,12 @@
             android:id="@+id/item_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="존나 맛있네요 시발"
+            android:text="리뷰를 작성해주세요"
             android:textColor="@color/grey_700"
             android:textSize="16dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="5dp"
             android:background="@drawable/layout_border"
             android:lines="5"/>
 

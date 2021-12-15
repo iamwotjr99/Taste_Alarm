@@ -5,20 +5,32 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <SearchView
-        android:id="@+id/home_searchview"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/home_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@drawable/layout_border"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:iconifiedByDefault="false"
-        android:queryHint="맛집검색"
-        app:layout_constraintBottom_toTopOf="@id/home_naverMap"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49"
-        tools:layout_editor_absoluteX="5dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:textStyle="bold"
+            android:textSize="34dp"
+            android:textColor="@color/black"
+            android:layout_gravity="left"/>
+
+        <ImageButton
+            android:id="@+id/home_search"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/search"
+            android:background="@color/white"
+            android:layout_gravity="right|end"/>
+
+    </androidx.appcompat.widget.Toolbar>
 
 
     <fragment
@@ -28,7 +40,7 @@
         android:layout_marginBottom="3dp"
         android:layout_marginTop="5dp"
         app:layout_constraintBottom_toTopOf="@id/home_textView"
-        app:layout_constraintTop_toBottomOf="@id/home_searchview"
+        app:layout_constraintTop_toBottomOf="@id/home_toolbar"
         android:name="com.naver.maps.map.MapFragment"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"/>
