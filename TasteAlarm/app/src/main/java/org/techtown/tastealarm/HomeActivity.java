@@ -59,7 +59,7 @@ public class HomeActivity extends Fragment implements OnMapReadyCallback {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        searchView = view.findViewById(R.id.home_searchview);
+        searchView = view.findViewById(R.id.home_search);
 
         FragmentManager fm = getChildFragmentManager();
         MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.home_naverMap);
