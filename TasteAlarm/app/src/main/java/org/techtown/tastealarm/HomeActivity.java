@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 
 import com.naver.maps.geometry.LatLng;
@@ -50,7 +51,7 @@ public class HomeActivity extends Fragment implements OnMapReadyCallback {
     private HomeAdapter adapter;
     private NaverMap naverMap;
     private FusedLocationSource locationSource;
-    private SearchView searchView;
+    private ImageButton imgBtnSearch;
     LocationListener locationListener;
     private int beforePosition;
     private LatLng currLoc;
@@ -59,7 +60,7 @@ public class HomeActivity extends Fragment implements OnMapReadyCallback {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        searchView = view.findViewById(R.id.home_search);
+        imgBtnSearch = view.findViewById(R.id.home_search);
 
         FragmentManager fm = getChildFragmentManager();
         MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.home_naverMap);
@@ -133,7 +134,7 @@ public class HomeActivity extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        searchView.setOnClickListener(new View.OnClickListener() {
+        imgBtnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), HomeSearchActivity.class);
