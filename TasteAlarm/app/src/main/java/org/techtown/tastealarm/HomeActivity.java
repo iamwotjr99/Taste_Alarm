@@ -61,7 +61,7 @@ public class HomeActivity extends Fragment implements OnMapReadyCallback {
 
         searchView = view.findViewById(R.id.home_searchview);
 
-        FragmentManager fm = getActivity().getSupportFragmentManager();
+        FragmentManager fm = getChildFragmentManager();
         MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.home_naverMap);
         if(mapFragment == null) {
             mapFragment = MapFragment.newInstance();
@@ -144,19 +144,6 @@ public class HomeActivity extends Fragment implements OnMapReadyCallback {
 
         return view;
     }
-
-    /*@Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if(locationSource.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
-            if (!locationSource.isActivated()) { // 권한이 거부 될 경우
-                naverMap.setLocationTrackingMode(LocationTrackingMode.None);
-            }
-            naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
-            return;
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }*/
 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {

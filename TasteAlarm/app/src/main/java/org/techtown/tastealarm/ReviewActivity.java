@@ -126,7 +126,7 @@ public class ReviewActivity extends Fragment{
             }
         });
 
-        Call<List<Review>> reviewCall = retrofitAPI.getReviewList("getReviewList");
+        /*Call<List<Review>> reviewCall = retrofitAPI.getReviewList("getReviewList");
         reviewCall.enqueue(new Callback<List<Review>>() {
             @Override
             public void onResponse(Call<List<Review>> call, Response<List<Review>> response) {
@@ -147,7 +147,7 @@ public class ReviewActivity extends Fragment{
             public void onFailure(Call<List<Review>> call, Throwable t) {
                 Log.d("ReviewActivity", "Fail" + t.getMessage());
             }
-        });
+        });*/
 
 
         RecyclerView recyclerView = view.findViewById(R.id.review_recyclerview);
