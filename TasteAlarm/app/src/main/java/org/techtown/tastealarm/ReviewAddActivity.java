@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.ByteArrayOutputStream;
@@ -51,6 +52,9 @@ public class ReviewAddActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addreview);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         int id = getIntent().getIntExtra("id", 0);
         String nickname = getIntent().getStringExtra("nickname");
