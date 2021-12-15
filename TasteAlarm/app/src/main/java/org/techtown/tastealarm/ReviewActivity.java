@@ -3,6 +3,7 @@ package org.techtown.tastealarm;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,18 +48,7 @@ public class ReviewActivity extends Fragment{
     public void onResume() {
         super.onResume();
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                reviewAdapter.getFilter().filter(s);
-                return false;
-            }
-        });
+        Log.d("onResume", "Start onResume");
 
         Call<List<Review>> reviewCall = retrofitAPI.getReviewList("getReviewList");
         reviewCall.enqueue(new Callback<List<Review>>() {
@@ -66,15 +56,14 @@ public class ReviewActivity extends Fragment{
             public void onResponse(Call<List<Review>> call, Response<List<Review>> response) {
                 if(response.isSuccessful()) {
                     List<Review> result = response.body();
-                    for(int i = k; i < result.size(); i++) {
+                    reviewList = new ArrayList<>();
+                    for(int i = 0; i < result.size(); i++) {
                         if(reviewList.size() != result.size()) {
                             reviewList.add(new Review(result.get(i).getTitle(), result.get(i).getContent(),
                                     result.get(i).getPicture(), result.get(i).getUserName()));
-                            k++;
                             reviewAdapter.notifyDataSetChanged();
                         }
                     }
-
                 }
             }
 
@@ -83,6 +72,9 @@ public class ReviewActivity extends Fragment{
                 Log.d("ReviewActivity", "Fail" + t.getMessage());
             }
         });
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -126,17 +118,16 @@ public class ReviewActivity extends Fragment{
             }
         });
 
-        /*Call<List<Review>> reviewCall = retrofitAPI.getReviewList("getReviewList");
+        Call<List<Review>> reviewCall = retrofitAPI.getReviewList("getReviewList");
         reviewCall.enqueue(new Callback<List<Review>>() {
             @Override
             public void onResponse(Call<List<Review>> call, Response<List<Review>> response) {
                 if(response.isSuccessful()) {
                     List<Review> result = response.body();
-                    for(int i = k; i < result.size(); i++) {
+                    for(int i = 0; i < result.size(); i++) {
                         if(reviewList.size() != result.size()) {
                             reviewList.add(new Review(result.get(i).getTitle(), result.get(i).getContent(),
                                     result.get(i).getPicture(), result.get(i).getUserName()));
-                            k++;
                             reviewAdapter.notifyDataSetChanged();
                         }
                     }
@@ -147,7 +138,7 @@ public class ReviewActivity extends Fragment{
             public void onFailure(Call<List<Review>> call, Throwable t) {
                 Log.d("ReviewActivity", "Fail" + t.getMessage());
             }
-        });*/
+        });
 
 
         RecyclerView recyclerView = view.findViewById(R.id.review_recyclerview);
